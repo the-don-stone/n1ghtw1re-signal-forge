@@ -6,85 +6,261 @@ const Collective = () => {
   return (
     <Layout>
       <div className="container mx-auto px-4 py-16">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <h1 className="font-glitch text-4xl md:text-5xl text-cyberpunk-green mb-8">THE COLLECTIVE</h1>
           
-          <div className="space-y-8">
+          <div className="space-y-12">
             <section>
-              <h2 className="font-glitch text-2xl text-white mb-4">WHO WE ARE</h2>
-              <p className="font-mono text-white/90 mb-4">
-                The N1ghtw1re Collective is a decentralized network of individuals committed to digital liberation. We have no formal membership structure, no hierarchical leadership, and no central point of control.
+              <p className="font-mono text-xl text-white/90 mb-6">
+                This site is not the endpoint of the journey. Welcome to the nexus. N1ghtw1re runs deep — from rogue couriers to encrypted DJ sets, black market decks to back-alley blogs. Every link is a door. Every door leads deeper.
+              </p>
+              <p className="font-mono text-white/90 mb-6">
+                We operate as a network of autonomous nodes connected through shared values and common purpose. The sites linked below are fragments of a larger signal — scattered throughout the internet, each carrying part of the code we're writing together. Some offer tools. Others offer truth. A few may change the way you see the system. None of them ask for permission.
               </p>
               <p className="font-mono text-white/90">
-                We are hackers who believe in code ethics. We are mystics who recognize technology's spiritual dimensions. We are artists who visualize alternative futures. We are activists who fight for digital rights.
+                This isn't a map. It's a living circuit. From underground music networks to technomancer dispatches, memory smugglers to glitch-art galleries — each click pulls you deeper into the world we're building. Step through. Stay sharp. The static is watching.
               </p>
             </section>
             
             <section>
-              <h2 className="font-glitch text-2xl text-white mb-4">OUR STRUCTURE</h2>
-              <p className="font-mono text-white/90 mb-4">
-                We operate as a network of autonomous nodes connected through shared values and common purpose. Some of us work openly, others in anonymity. Some contribute code, others contribute concepts. All contributions are valued.
-              </p>
-              <p className="font-mono text-white/90">
-                Our coordination happens through encrypted channels, temporary autonomous zones, and periodic in-person gatherings. We make decisions through consensus when possible and through forking when necessary.
-              </p>
-            </section>
-            
-            <section>
-              <h2 className="font-glitch text-2xl text-white mb-4">JOIN THE COLLECTIVE</h2>
-              <p className="font-mono text-white/90 mb-4">
-                There is no formal application process. If you align with our manifesto and want to contribute to digital liberation, you are already part of the collective. Begin where you are, with what you have.
-              </p>
-              <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="border border-white/20 p-4">
-                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">CONTRIBUTE CODE</h3>
-                  <p className="font-mono text-sm text-white/90 mb-3">
-                    Help develop our open-source tools or contribute to existing projects aligned with our values.
+              <h2 className="font-glitch text-3xl text-white mb-6">CURRENT INITIATIVES</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="border border-white/20 p-4 hover:border-cyberpunk-green transition-colors">
+                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">The Bright Descent</h3>
+                  <p className="font-mono text-sm text-white/90">
+                    Coming Soon
+                  </p>
+                </div>
+                
+                <div className="border border-white/20 p-4 hover:border-cyberpunk-green transition-colors">
+                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">Circuit Breach</h3>
+                  <p className="font-mono text-sm text-white/90 mb-2">
+                    Cyberpunk media analysis beyond the neon glow. We dissect the genre's core themes, challenge tech-bro interpretations, and explore the wires connecting fiction to our reality through philosophy, sociology, and science.
                   </p>
                   <a 
-                    href="https://github.com/n1ghtw1re" 
+                    href="https://circuit-breach.neocities.org/" 
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="font-mono text-xs text-cyberpunk-green hover:underline"
                   >
-                    GITHUB REPOSITORY →
+                    ACCESS CIRCUIT BREACH →
                   </a>
                 </div>
                 
-                <div className="border border-white/20 p-4">
-                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">CONTRIBUTE IDEAS</h3>
-                  <p className="font-mono text-sm text-white/90 mb-3">
-                    Share concepts, strategies, or insights related to digital resistance and liberation.
+                <div className="border border-white/20 p-4 hover:border-cyberpunk-green transition-colors">
+                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">Code Heroes</h3>
+                  <p className="font-mono text-sm text-white/90 mb-2">
+                    Code Heroes was created to highlight the stories of technology pioneers who used their talents to make the world better—not just to accumulate wealth or power.
                   </p>
                   <a 
-                    href="#forum" 
+                    href="https://code-heroes.lovable.app/"
+                    target="_blank"
+                    rel="noopener noreferrer" 
                     className="font-mono text-xs text-cyberpunk-green hover:underline"
                   >
-                    DISCUSSION FORUM →
+                    ACCESS CODE HEROES →
                   </a>
                 </div>
                 
-                <div className="border border-white/20 p-4">
-                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">CONTRIBUTE CONTENT</h3>
-                  <p className="font-mono text-sm text-white/90 mb-3">
-                    Write articles, create art, or produce other media that advances our mission.
+                <div className="border border-white/20 p-4 hover:border-cyberpunk-green transition-colors">
+                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">The Collector Comic Collection App</h3>
+                  <p className="font-mono text-sm text-white/90">
+                    Coming Soon
+                  </p>
+                </div>
+                
+                <div className="border border-white/20 p-4 hover:border-cyberpunk-green transition-colors">
+                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">Crazy Eddies Cyberdeck Emporium</h3>
+                  <p className="font-mono text-sm text-white/90 mb-2">
+                    Eddie's philosophy is simple: high-end tech shouldn't be locked behind corporate walls. Everyone deserves the chance to jack in with quality gear—especially if that gear might occasionally cause problems for the corps.
                   </p>
                   <a 
-                    href="#submit" 
+                    href="https://crazy-eddies.netlify.app/"
+                    target="_blank"
+                    rel="noopener noreferrer" 
                     className="font-mono text-xs text-cyberpunk-green hover:underline"
                   >
-                    CONTENT SUBMISSION →
+                    ACCESS CRAZY EDDIES →
                   </a>
                 </div>
                 
-                <div className="border border-white/20 p-4">
-                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">CONTRIBUTE RESOURCES</h3>
-                  <p className="font-mono text-sm text-white/90 mb-3">
-                    Support our projects through donations of time, skills, or other resources.
+                <div className="border border-white/20 p-4 hover:border-cyberpunk-green transition-colors">
+                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">Github</h3>
+                  <p className="font-mono text-sm text-white/90 mb-2">
+                    Repository for our projects. We provide privacy-first development, decentralized tools, and web design that respects user freedom. We build open, ethical, and human-centered technology.
                   </p>
                   <a 
-                    href="#support" 
+                    href="https://github.com/n1ghtw1re"
+                    target="_blank"
+                    rel="noopener noreferrer" 
                     className="font-mono text-xs text-cyberpunk-green hover:underline"
                   >
-                    SUPPORT METHODS →
+                    ACCESS GITHUB →
+                  </a>
+                </div>
+                
+                <div className="border border-white/20 p-4 hover:border-cyberpunk-green transition-colors">
+                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">Hackers Tarot</h3>
+                  <p className="font-mono text-sm text-white/90 mb-2">
+                    The Hacker's Tarot is a reimagining of the traditional major arcana for the digital age. Each card represents the forces, figures, and concepts that shape our technological landscape—from The User to The Global Citizen.
+                  </p>
+                  <a 
+                    href="https://the-hackers-tarot.lovable.app/"
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                    className="font-mono text-xs text-cyberpunk-green hover:underline"
+                  >
+                    ACCESS HACKERS TAROT →
+                  </a>
+                </div>
+                
+                <div className="border border-white/20 p-4 hover:border-cyberpunk-green transition-colors">
+                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">N1ghtw1re Gumroad</h3>
+                  <p className="font-mono text-sm text-white/90 mb-2">
+                    Show support for this and all our other projects by checking out our Gumroad shop.
+                  </p>
+                  <a 
+                    href="https://n1ghtw1re.gumroad.com/"
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                    className="font-mono text-xs text-cyberpunk-green hover:underline"
+                  >
+                    ACCESS GUMROAD →
+                  </a>
+                </div>
+                
+                <div className="border border-white/20 p-4 hover:border-cyberpunk-green transition-colors">
+                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">Interlinked Records</h3>
+                  <p className="font-mono text-sm text-white/90 mb-2">
+                    Based in Siem Reap, Cambodia, INTERLINKED RECORDS is an independent label founded in the digital underground, operating at the intersection of dub techno, industrial soundscapes, and gothic synth experiments.
+                  </p>
+                  <a 
+                    href="https://interlinked-records.lovable.app/"
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                    className="font-mono text-xs text-cyberpunk-green hover:underline"
+                  >
+                    ACCESS INTERLINKED RECORDS →
+                  </a>
+                </div>
+                
+                <div className="border border-white/20 p-4 hover:border-cyberpunk-green transition-colors">
+                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">Into Ideaspace</h3>
+                  <p className="font-mono text-sm text-white/90 mb-2">
+                    Into Ideaspace is both a manifesto and a map—an urgent call to reclaim the vast terrain of human thought from the hands of those who seek to fence it off and sell it back to us. In an age when corporations patent dreams and algorithms rewrite reality, this book dares to ask: What if imagination were a human right?
+                  </p>
+                  <a 
+                    href="https://into-ideaspace.lovable.app/"
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                    className="font-mono text-xs text-cyberpunk-green hover:underline"
+                  >
+                    ACCESS INTO IDEASPACE →
+                  </a>
+                </div>
+                
+                <div className="border border-white/20 p-4 hover:border-cyberpunk-green transition-colors">
+                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">N1ghtw1re Collective</h3>
+                  <p className="font-mono text-sm text-white/90 mb-2">
+                    N1ghtw1re is an anonymous collective dedicated to empowering individuals to reclaim their privacy, autonomy, and freedom in an age dominated by surveillance, algorithms, and corporate control. N1ghtw1re is more than a website—it's a living hypersigil, a digital beacon for those ready to challenge the status quo and embrace the tools of liberation.
+                  </p>
+                  <a 
+                    href="https://n1ghtw1re.neocities.org"
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                    className="font-mono text-xs text-cyberpunk-green hover:underline"
+                  >
+                    ACCESS N1GHTW1RE COLLECTIVE →
+                  </a>
+                </div>
+                
+                <div className="border border-white/20 p-4 hover:border-cyberpunk-green transition-colors">
+                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">N1ghtw1re Studios</h3>
+                  <p className="font-mono text-sm text-white/90 mb-2">
+                    N1ghtw1re is a digital studio specializing in creative, privacy-focused, websites, applications, and media projects with a retro design and aesthetic. Our goal is to reclaim the internet from algorithms and return the net to the individual.
+                  </p>
+                  <a 
+                    href="https://n1ghtw1re-studios.lovable.app/"
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                    className="font-mono text-xs text-cyberpunk-green hover:underline"
+                  >
+                    ACCESS N1GHTW1RE STUDIOS →
+                  </a>
+                </div>
+                
+                <div className="border border-white/20 p-4 hover:border-cyberpunk-green transition-colors">
+                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">Synapse Express</h3>
+                  <p className="font-mono text-sm text-white/90 mb-2">
+                    Encrypted mnemonic package delivery across networks and physical planes. Your neurons, our highway.
+                  </p>
+                  <a 
+                    href="https://synapse-express.netlify.app/"
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                    className="font-mono text-xs text-cyberpunk-green hover:underline"
+                  >
+                    ACCESS SYNAPSE EXPRESS →
+                  </a>
+                </div>
+                
+                <div className="border border-white/20 p-4 hover:border-cyberpunk-green transition-colors">
+                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">Taco Bell San Angeles</h3>
+                  <p className="font-mono text-sm text-white/90 mb-2">
+                    Now all restaurants are Taco Bell.
+                  </p>
+                  <a 
+                    href="https://taco-bell-sanangeles.netlify.app/"
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                    className="font-mono text-xs text-cyberpunk-green hover:underline"
+                  >
+                    ACCESS TACO BELL SAN ANGELES →
+                  </a>
+                </div>
+                
+                <div className="border border-white/20 p-4 hover:border-cyberpunk-green transition-colors">
+                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">Tech Noir</h3>
+                  <p className="font-mono text-sm text-white/90 mb-2">
+                    The ultimate Hollywood nightclub. We guarantee you'll be saying "I'll be back" after your first visit.
+                  </p>
+                  <a 
+                    href="https://tech-noir.netlify.app/"
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                    className="font-mono text-xs text-cyberpunk-green hover:underline"
+                  >
+                    ACCESS TECH NOIR →
+                  </a>
+                </div>
+                
+                <div className="border border-white/20 p-4 hover:border-cyberpunk-green transition-colors">
+                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">TheDonStone</h3>
+                  <p className="font-mono text-sm text-white/90 mb-2">
+                    The Don Stone is a Siem Reap-based electronic music producer and DJ known for underground warehouse techno, experimental bass, and dark ambient soundscapes.
+                  </p>
+                  <a 
+                    href="https://thedonstone.lovable.app/"
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                    className="font-mono text-xs text-cyberpunk-green hover:underline"
+                  >
+                    ACCESS THEDONSTONE →
+                  </a>
+                </div>
+                
+                <div className="border border-white/20 p-4 hover:border-cyberpunk-green transition-colors">
+                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">Vinyl Violence</h3>
+                  <p className="font-mono text-sm text-white/90 mb-2">
+                    Deep dives into classic albums, thoughts on emerging scenes, explorations of the culture surrounding the music, and maybe the occasional rant.
+                  </p>
+                  <a 
+                    href="https://vinyl-violence.netlify.app/"
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                    className="font-mono text-xs text-cyberpunk-green hover:underline"
+                  >
+                    ACCESS VINYL VIOLENCE →
                   </a>
                 </div>
               </div>
@@ -103,32 +279,6 @@ const Collective = () => {
                 <li>• Practice mutual aid and solidarity</li>
                 <li>• Reject exploitation and oppression in all forms</li>
               </ul>
-            </section>
-            
-            <section>
-              <h2 className="font-glitch text-2xl text-white mb-4">CURRENT INITIATIVES</h2>
-              <div className="grid grid-cols-1 gap-4">
-                <div className="border border-white/20 p-4">
-                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">CRYPTO-COMMONS PROJECT</h3>
-                  <p className="font-mono text-sm text-white/90">
-                    Developing decentralized digital infrastructure for community governance and resource sharing.
-                  </p>
-                </div>
-                
-                <div className="border border-white/20 p-4">
-                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">DEAD DROP NETWORK</h3>
-                  <p className="font-mono text-sm text-white/90">
-                    Creating physical-digital interfaces for anonymous information exchange in urban environments.
-                  </p>
-                </div>
-                
-                <div className="border border-white/20 p-4">
-                  <h3 className="font-glitch text-xl text-cyberpunk-green mb-2">COUNTER-SURVEILLANCE ZINE</h3>
-                  <p className="font-mono text-sm text-white/90">
-                    Quarterly publication on practical privacy tactics and digital resistance strategies.
-                  </p>
-                </div>
-              </div>
             </section>
           </div>
         </div>
