@@ -1,52 +1,53 @@
 
 import React from 'react';
 import Layout from '../components/layout/Layout';
+import { Link } from 'react-router-dom';
+
+// Blog posts data - easy to add more
+const posts = [
+  {
+    id: "the-surveillance-state-of-mind",
+    title: "The Surveillance State of Mind",
+    excerpt: "How psychological manipulation drives digital monitoring systems and how to develop mental resistance.",
+    date: "2025-05-12",
+    author: "Neural_Ghost",
+    tags: ["psychology", "resistance", "surveillance"]
+  },
+  {
+    id: "digital-alchemy",
+    title: "Digital Alchemy: Transforming Control into Freedom",
+    excerpt: "Exploring the mystical dimensions of code and how technological rituals can counter algorithmic control.",
+    date: "2025-05-05",
+    author: "CrypticSignal",
+    tags: ["mysticism", "technology", "liberation"]
+  },
+  {
+    id: "opsec-for-dissidents",
+    title: "OPSEC for Digital Dissidents",
+    excerpt: "Practical strategies for maintaining operational security while engaging in digital resistance.",
+    date: "2025-04-28",
+    author: "0xShadow",
+    tags: ["security", "privacy", "activism"]
+  },
+  {
+    id: "corporate-dreamscape",
+    title: "The Corporate Dreamscape: Escaping the Algorithm",
+    excerpt: "How recommendation algorithms shape consciousness and techniques for breaking free from their influence.",
+    date: "2025-04-21",
+    author: "DataSpecter",
+    tags: ["algorithms", "consciousness", "resistance"]
+  },
+  {
+    id: "techno-fascism-rising",
+    title: "Techno-Fascism Rising: Signs and Countermeasures",
+    excerpt: "Analyzing the convergence of authoritarianism and surveillance technology, with strategies for resistance.",
+    date: "2025-04-14",
+    author: "ResistanceVector",
+    tags: ["politics", "fascism", "technology"]
+  }
+];
 
 const Blog = () => {
-  // Mock blog posts data
-  const posts = [
-    {
-      id: 1,
-      title: "The Surveillance State of Mind",
-      excerpt: "How psychological manipulation drives digital monitoring systems and how to develop mental resistance.",
-      date: "2025-05-12",
-      author: "Neural_Ghost",
-      tags: ["psychology", "resistance", "surveillance"]
-    },
-    {
-      id: 2,
-      title: "Digital Alchemy: Transforming Control into Freedom",
-      excerpt: "Exploring the mystical dimensions of code and how technological rituals can counter algorithmic control.",
-      date: "2025-05-05",
-      author: "CrypticSignal",
-      tags: ["mysticism", "technology", "liberation"]
-    },
-    {
-      id: 3,
-      title: "OPSEC for Digital Dissidents",
-      excerpt: "Practical strategies for maintaining operational security while engaging in digital resistance.",
-      date: "2025-04-28",
-      author: "0xShadow",
-      tags: ["security", "privacy", "activism"]
-    },
-    {
-      id: 4,
-      title: "The Corporate Dreamscape: Escaping the Algorithm",
-      excerpt: "How recommendation algorithms shape consciousness and techniques for breaking free from their influence.",
-      date: "2025-04-21",
-      author: "DataSpecter",
-      tags: ["algorithms", "consciousness", "resistance"]
-    },
-    {
-      id: 5,
-      title: "Techno-Fascism Rising: Signs and Countermeasures",
-      excerpt: "Analyzing the convergence of authoritarianism and surveillance technology, with strategies for resistance.",
-      date: "2025-04-14",
-      author: "ResistanceVector",
-      tags: ["politics", "fascism", "technology"]
-    }
-  ];
-
   return (
     <Layout>
       <div className="container mx-auto px-4 py-16">
@@ -61,9 +62,9 @@ const Blog = () => {
             {posts.map(post => (
               <article key={post.id} className="border border-white/20 p-6 hover:border-cyberpunk-green transition-colors">
                 <h2 className="font-glitch text-2xl text-white mb-3">
-                  <a href={`#post-${post.id}`} className="hover:text-cyberpunk-green transition-colors">
+                  <Link to={`/blog/${post.id}`} className="hover:text-cyberpunk-green transition-colors">
                     {post.title}
-                  </a>
+                  </Link>
                 </h2>
                 
                 <div className="flex items-center space-x-4 mb-4">
@@ -83,12 +84,12 @@ const Blog = () => {
                   ))}
                 </div>
                 
-                <a 
-                  href={`#post-${post.id}`} 
+                <Link
+                  to={`/blog/${post.id}`}
                   className="font-mono text-cyberpunk-green hover:underline"
                 >
                   READ FULL DISPATCH →
-                </a>
+                </Link>
               </article>
             ))}
           </div>

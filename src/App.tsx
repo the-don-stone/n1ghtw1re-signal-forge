@@ -10,6 +10,7 @@ import Collective from "./pages/Collective";
 import Tools from "./pages/Tools";
 import Manifesto from "./pages/Manifesto";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/tools" element={<Tools />} />
           <Route path="/manifesto" element={<Manifesto />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
