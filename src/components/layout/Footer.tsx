@@ -25,13 +25,18 @@ const Footer: React.FC = () => {
                 </a>
               </p>
               <p>
-                <a href="https://bsky.app/n1ghtw1re" className="text-white/80 hover:text-cyberpunk-green transition-colors">
+                <a href="https://bsky.app/profile/n1ghtw1re.neocities.org" className="text-white/80 hover:text-cyberpunk-green transition-colors">
                   Bluesky
                 </a>
               </p>
               <p>
-                <a href="https://mastodon.social/@n1ghtw1re" className="text-white/80 hover:text-cyberpunk-green transition-colors">
+                <a href="https://defcon.social/@n1ghtw1re" className="text-white/80 hover:text-cyberpunk-green transition-colors">
                   Mastodon
+                </a>
+              </p>
+              <p>
+                <a href="https://n1ghtw1re.neocities.org" className="text-white/80 hover:text-cyberpunk-green transition-colors">
+                  Neocities
                 </a>
               </p>
             </div>
