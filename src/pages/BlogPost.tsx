@@ -1,41 +1,26 @@
 
-import React, { useEffect, useState } from 'react';
-import Layout from '../components/layout/Layout';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getBlogPostById } from '../utils/blogUtils';
-import type { BlogPostData } from '../articles/the-surveillance-state-of-mind';
+import { useQuery } from '@tanstack/react-query';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import { fetchBlogPostBySlug } from '../utils/supabaseClient';
+import Layout from '../components/layout/Layout';
 
 const BlogPost = () => {
-  const { id } = useParams<{ id: string }>();
-  const [loading, setLoading] = useState(true);
-  const [post, setPost] = useState<{ metadata: BlogPostData; Content: React.ComponentType } | null>(null);
-  const [error, setError] = useState(false);
+  const { slug } = useParams<{ slug: string }>();
+  
+  const { data: post, isLoading, error } = useQuery({
+    queryKey: ['blogPost', slug],
+    queryFn: async () => {
+      if (!slug) return null;
+      const { data, error } = await fetchBlogPostBySlug(slug);
+      if (error) throw error;
+      return data;
+    }
+  });
 
-  useEffect(() => {
-    const loadPost = async () => {
-      try {
-        if (!id) return;
-        
-        setLoading(true);
-        const postData = await getBlogPostById(id);
-        
-        if (postData) {
-          setPost(postData);
-        } else {
-          setError(true);
-        }
-      } catch (err) {
-        console.error('Error loading blog post:', err);
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadPost();
-  }, [id]);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <Layout>
         <div className="container mx-auto px-4 py-16">
@@ -66,21 +51,25 @@ const BlogPost = () => {
     );
   }
 
-  const { metadata, Content } = post;
-
   return (
     <Layout>
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-3xl mx-auto">
-          <h1 className="font-glitch text-4xl md:text-5xl text-cyberpunk-green mb-6">{metadata.title}</h1>
+          <h1 className="font-glitch text-4xl md:text-5xl text-cyberpunk-green mb-6">{post.title}</h1>
           
           <div className="flex items-center space-x-4 mb-8">
-            <span className="font-mono text-xs text-white/60">{metadata.date}</span>
-            <span className="font-mono text-xs text-cyberpunk-green">by {metadata.author}</span>
+            <span className="font-mono text-xs text-white/60">
+              {new Date(post.published_at).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </span>
+            <span className="font-mono text-xs text-cyberpunk-green">by {post.author}</span>
           </div>
           
           <div className="flex flex-wrap gap-2 mb-12">
-            {metadata.tags.map(tag => (
+            {post.tags.map(tag => (
               <span key={tag} className="px-2 py-1 text-xs font-mono bg-white/10 text-white/80">
                 {tag}
               </span>
@@ -88,7 +77,32 @@ const BlogPost = () => {
           </div>
           
           <article className="prose prose-invert max-w-none font-mono">
-            <Content />
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                h1: ({ node, ...props }) => <h1 className="text-3xl font-glitch text-cyberpunk-green mt-8 mb-4" {...props} />,
+                h2: ({ node, ...props }) => <h2 className="text-2xl font-glitch text-white mt-6 mb-3" {...props} />,
+                h3: ({ node, ...props }) => <h3 className="text-xl font-glitch text-white/90 mt-5 mb-2" {...props} />,
+                p: ({ node, ...props }) => <p className="my-4 text-white/80" {...props} />,
+                a: ({ node, ...props }) => <a className="text-cyberpunk-green hover:underline" {...props} />,
+                ul: ({ node, ...props }) => <ul className="list-disc pl-6 my-4" {...props} />,
+                ol: ({ node, ...props }) => <ol className="list-decimal pl-6 my-4" {...props} />,
+                li: ({ node, ...props }) => <li className="my-1" {...props} />,
+                blockquote: ({ node, ...props }) => (
+                  <blockquote 
+                    className="border-l-4 border-cyberpunk-green pl-4 my-4 italic text-white/70" 
+                    {...props} 
+                  />
+                ),
+                code: ({ node, inline, ...props }) => 
+                  inline ? 
+                    <code className="bg-white/10 px-1 rounded text-cyberpunk-green" {...props} /> : 
+                    <code className="block bg-black/50 p-4 rounded-md my-4 overflow-auto w-full" {...props} />,
+                pre: ({ node, ...props }) => <pre className="bg-black/50 p-0 rounded-md my-4 overflow-auto" {...props} />,
+              }}
+            >
+              {post.content}
+            </ReactMarkdown>
           </article>
           
           <div className="mt-12 pt-8 border-t border-white/20">

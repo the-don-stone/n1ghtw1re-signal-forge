@@ -2,10 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { user } = useAuth();
   
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -71,6 +73,14 @@ const Header: React.FC = () => {
           >
             MANIFESTO
           </Link>
+          {user && (
+            <Link 
+              to="/admin/dashboard"
+              className={`font-mono hover:text-cyberpunk-green transition-colors ${isActive('/admin/dashboard') ? 'text-cyberpunk-green' : 'text-white'}`}
+            >
+              ADMIN
+            </Link>
+          )}
         </nav>
       </div>
       
@@ -123,6 +133,15 @@ const Header: React.FC = () => {
           >
             MANIFESTO
           </Link>
+          {user && (
+            <Link 
+              to="/admin/dashboard"
+              className={`font-glitch text-2xl hover:text-cyberpunk-green transition-colors ${isActive('/admin/dashboard') ? 'text-cyberpunk-green' : 'text-white'}`}
+              onClick={closeMenu}
+            >
+              ADMIN
+            </Link>
+          )}
         </div>
       )}
     </header>
