@@ -1,14 +1,11 @@
+
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-// Import dynamically to prevent build errors if package isn't fully loaded yet
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import Layout from '../components/layout/Layout';
 import { fetchBlogPostBySlug } from '../utils/supabaseClient';
-
-// Define a simplified markdown component for use until the real one loads
-const SimpleContent = ({ children }: { children: string }) => {
-  return <div className="whitespace-pre-wrap font-mono text-white/80">{children}</div>;
-};
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -80,7 +77,12 @@ const BlogPost = () => {
           </div>
           
           <article className="prose prose-invert max-w-none font-mono">
-            <SimpleContent>{post.content}</SimpleContent>
+            <ReactMarkdown 
+              remarkPlugins={[remarkGfm]} 
+              className="markdown-content"
+            >
+              {post.content}
+            </ReactMarkdown>
           </article>
           
           <div className="mt-12 pt-8 border-t border-white/20">
