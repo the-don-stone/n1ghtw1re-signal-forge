@@ -14,7 +14,7 @@ export const metadata: BlogPostData = {
   id: "the-surveillance-state-of-mind",
   title: "TESTING",
   excerpt: "How psychological manipulation drives digital monitoring systems and how to develop mental resistance.",
-  date: "2025-05-12",
+  date: "2025-05-19",
   author: "Neural_Ghost",
   tags: ["psychology", "resistance", "surveillance"]
 };
