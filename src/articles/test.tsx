@@ -11,7 +11,7 @@ export interface BlogPostData {
 }
 
 export const metadata: BlogPostData = {
-  id: "the-surveillance-state-of-mind",
+  id: "testing",
   title: "TESTING",
   excerpt: "How psychological manipulation drives digital monitoring systems and how to develop mental resistance.",
   date: "2025-05-19",
