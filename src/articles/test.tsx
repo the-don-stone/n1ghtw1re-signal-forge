@@ -22,7 +22,7 @@ export const metadata: BlogPostData = {
 const Content: React.FC = () => {
   return (
     <div>
-      <h2 className="font-glitch text-2xl text-white mt-8 mb-4">Introduction: The Invisible Prison</h2>
+      <h2 className="font-glitch text-2xl text-white mt-8 mb-4">TESTING</h2>
       
       <p className="font-mono text-white/90 mb-4">
 TESTING      </p>
