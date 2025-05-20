@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
 import { getSupaBlogPostById, SupaBlogPost } from '../utils/supablogUtils';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 
 const TestBlogPost = () => {
   const { id } = useParams<{ id: string }>();
@@ -92,8 +94,8 @@ const TestBlogPost = () => {
             ))}
           </div>
           
-          <article className="prose prose-invert max-w-none font-mono whitespace-pre-wrap">
-            {post.content}
+          <article className="prose prose-invert max-w-none font-mono">
+            <ReactMarkdown rehypePlugins={[rehypeRaw]}>{post.content}</ReactMarkdown>
           </article>
           
           <div className="mt-12 pt-8 border-t border-white/20">
