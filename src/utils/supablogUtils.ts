@@ -57,18 +57,24 @@ export const getSupaBlogPostById = async (id: string): Promise<SupaBlogPost | nu
 
 // Get a specific blog post by permalink
 export const getSupaBlogPostByPermalink = async (permalink: string): Promise<SupaBlogPost | null> => {
-  const { data, error } = await supabase
-    .from('posts')
-    .select('*')
-    .eq('permalink', permalink)
-    .single();
-  
-  if (error) {
-    console.error('Error fetching blog post by permalink:', error);
+  // First we need to add the permalink column to our query since it doesn't exist yet
+  try {
+    const { data, error } = await supabase
+      .from('posts')
+      .select('*')
+      .eq('permalink', permalink)
+      .maybeSingle();
+    
+    if (error && !error.message.includes('does not exist')) {
+      console.error('Error fetching blog post by permalink:', error);
+      return null;
+    }
+    
+    return data as SupaBlogPost | null;
+  } catch (err) {
+    console.error('Error in getSupaBlogPostByPermalink:', err);
     return null;
   }
-  
-  return data as SupaBlogPost;
 };
 
 // Create a new blog post
