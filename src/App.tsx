@@ -15,29 +15,32 @@ import TestBlog from "./pages/TestBlog";
 import TestBlogPost from "./pages/TestBlogPost";
 import NotFound from "./pages/NotFound";
 
+// Create a new QueryClient instance
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/collective" element={<Collective />} />
-          <Route path="/tools" element={<Tools />} />
-          <Route path="/manifesto" element={<Manifesto />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:id" element={<BlogPost />} />
-          <Route path="/test-blog" element={<TestBlog />} />
-          <Route path="/test-blog/:id" element={<TestBlogPost />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <TooltipProvider>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/collective" element={<Collective />} />
+            <Route path="/tools" element={<Tools />} />
+            <Route path="/manifesto" element={<Manifesto />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<BlogPost />} />
+            <Route path="/test-blog" element={<TestBlog />} />
+            <Route path="/test-blog/:id" element={<TestBlogPost />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Toaster />
+          <Sonner />
+        </TooltipProvider>
       </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+    </QueryClientProvider>
+  );
+};
 
 export default App;
