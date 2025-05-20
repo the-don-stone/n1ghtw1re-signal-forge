@@ -11,6 +11,8 @@ import Tools from "./pages/Tools";
 import Manifesto from "./pages/Manifesto";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import TestBlog from "./pages/TestBlog";
+import TestBlogPost from "./pages/TestBlogPost";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +31,8 @@ const App = () => (
           <Route path="/manifesto" element={<Manifesto />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogPost />} />
+          <Route path="/test-blog" element={<TestBlog />} />
+          <Route path="/test-blog/:id" element={<TestBlogPost />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
