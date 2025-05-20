@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
-import { getSupaBlogPostById, SupaBlogPost } from '../utils/supablogUtils';
+import { getSupaBlogPostById, getSupaBlogPostByPermalink, SupaBlogPost } from '../utils/supablogUtils';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 
@@ -21,7 +21,14 @@ const TestBlogPost = () => {
       }
 
       try {
-        const postData = await getSupaBlogPostById(id);
+        // First try to get post by permalink
+        let postData = await getSupaBlogPostByPermalink(id);
+        
+        // If not found by permalink, try by ID
+        if (!postData) {
+          postData = await getSupaBlogPostById(id);
+        }
+
         if (postData) {
           setPost(postData);
         } else {
@@ -73,21 +80,21 @@ const TestBlogPost = () => {
     <Layout>
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-3xl mx-auto">
-          <h1 className="font-glitch text-4xl md:text-5xl text-cyberpunk-green mb-6">{post.title}</h1>
+          <h1 className="font-glitch text-4xl md:text-5xl text-cyberpunk-green mb-6">{post?.title}</h1>
           
           <div className="flex items-center space-x-4 mb-8">
             <span className="font-mono text-xs text-white/60">
-              {new Date(post.created_at).toLocaleDateString('en-US', {
+              {post && new Date(post.created_at).toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
               })}
             </span>
-            <span className="font-mono text-xs text-cyberpunk-green">from {post.blog_location}</span>
+            <span className="font-mono text-xs text-cyberpunk-green">from {post?.blog_location}</span>
           </div>
           
           <div className="flex flex-wrap gap-2 mb-12">
-            {post.tags && post.tags.map((tag, index) => (
+            {post?.tags && post.tags.map((tag, index) => (
               <span key={index} className="px-2 py-1 text-xs font-mono bg-white/10 text-white/80">
                 {tag}
               </span>
@@ -95,7 +102,7 @@ const TestBlogPost = () => {
           </div>
           
           <article className="prose prose-invert max-w-none font-mono">
-            <ReactMarkdown rehypePlugins={[rehypeRaw]}>{post.content}</ReactMarkdown>
+            {post && <ReactMarkdown rehypePlugins={[rehypeRaw]}>{post.content}</ReactMarkdown>}
           </article>
           
           <div className="mt-12 pt-8 border-t border-white/20">

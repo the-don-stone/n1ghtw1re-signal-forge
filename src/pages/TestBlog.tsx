@@ -186,7 +186,10 @@ const TestBlog = () => {
                 <Card key={post.id} className="border border-white/20 bg-black/40 text-white">
                   <CardHeader>
                     <CardTitle className="font-glitch text-2xl text-white">
-                      <Link to={`/test-blog/${post.id}`} className="hover:text-cyberpunk-green transition-colors">
+                      <Link 
+                        to={`/test-blog/${post.permalink || post.id}`} 
+                        className="hover:text-cyberpunk-green transition-colors"
+                      >
                         {post.title}
                       </Link>
                     </CardTitle>
@@ -220,7 +223,7 @@ const TestBlog = () => {
                   </CardContent>
                   <CardFooter>
                     <Link
-                      to={`/test-blog/${post.id}`}
+                      to={`/test-blog/${post.permalink || post.id}`}
                       className="font-mono text-cyberpunk-green hover:underline"
                     >
                       READ FULL DISPATCH →
