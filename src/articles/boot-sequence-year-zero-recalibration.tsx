@@ -16,12 +16,12 @@ export const metadata: BlogPostData = {
   date: "2025-05-21", // Converted from 5-21-25
   author: "Axi0m",
   tags: [
-    "strategic manifesto",
+    "manifesto",
     "cybersecurity",
-    "N1ghtw1re protocol",
-    "digital sovereignty",
-    "surveillance capitalism",
-    "decentralized resistance"
+    "sovereignty",
+    "surveillance",
+    "capitalism",
+    "decentralized"
   ]
 };
 
