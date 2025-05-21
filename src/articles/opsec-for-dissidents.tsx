@@ -15,7 +15,7 @@ export const metadata: BlogPostData = {
   title: "OPSEC for Digital Dissidents",
   excerpt: "Practical strategies for maintaining operational security while engaging in digital resistance.",
   date: "2025-04-28",
-  author: "0xShadow",
+  author: "Axi0m",
   tags: ["security", "privacy", "activism"]
 };
 
