@@ -15,7 +15,7 @@ export const metadata: BlogPostData = {
   title: "Techno-Fascism Rising: Signs and Countermeasures",
   excerpt: "Analyzing the convergence of authoritarianism and surveillance technology, with strategies for resistance.",
   date: "2025-04-14",
-  author: "ResistanceVector",
+  author: "C1nder",
   tags: ["politics", "fascism", "technology"]
 };
 
