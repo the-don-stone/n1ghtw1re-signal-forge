@@ -13,7 +13,7 @@ export const metadata: BlogPostData = {
   id: "digital-fascism",
   title: "Digital Fascism",
   excerpt: "Where control masquerades as convenience, and dissent is filtered, shadowbanned, or erased.",
-  date: "2024-07-26", // Assuming a publication date
+  date: "2025-05-20", // Assuming a publication date
   author: "ImVexd",
   tags: ["digital rights", "censorship", "control", "big tech", "privacy", "dissent", "fascism", "surveillance"]
 };
