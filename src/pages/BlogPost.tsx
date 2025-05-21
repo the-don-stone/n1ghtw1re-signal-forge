@@ -4,6 +4,8 @@ import Layout from '../components/layout/Layout';
 import { useParams, Link } from 'react-router-dom';
 import { getBlogPostById } from '../utils/blogUtils';
 import type { BlogPostData } from '../articles/the-surveillance-state-of-mind';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 
 const BlogPost = () => {
   const { id } = useParams<{ id: string }>();
@@ -92,6 +94,25 @@ const BlogPost = () => {
           </article>
           
           <div className="mt-12 pt-8 border-t border-white/20">
+            <h2 className="font-glitch text-2xl text-white mb-6">Related Articles</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+              <Button variant="outline" className="flex items-center justify-between py-6 h-auto text-left">
+                <div>
+                  <h3 className="font-glitch text-cyberpunk-green mb-2">Related Article 1</h3>
+                  <p className="text-xs text-white/70 font-mono">Click to read more about this topic</p>
+                </div>
+                <ArrowRight className="ml-2" />
+              </Button>
+              
+              <Button variant="outline" className="flex items-center justify-between py-6 h-auto text-left">
+                <div>
+                  <h3 className="font-glitch text-cyberpunk-green mb-2">Related Article 2</h3>
+                  <p className="text-xs text-white/70 font-mono">Explore more about this subject</p>
+                </div>
+                <ArrowRight className="ml-2" />
+              </Button>
+            </div>
+            
             <Link 
               to="/blog" 
               className="inline-block font-mono text-cyberpunk-green hover:underline"
