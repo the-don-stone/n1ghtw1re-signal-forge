@@ -10,7 +10,7 @@ export interface BlogPostData {
 }
 
 export const metadata: BlogPostData = {
-  id: "join-the-movement-future-of-web",
+  id: "create-the-future-web",
   title: "Join the Movement - The Future of the Web Belongs to Those Who Build It",
   excerpt: "The power to shape the future of the web lies not in the hands of corporations or governments, but in the hands of individuals, creators, and communities.",
   date: "2025-05-19", // Converted from 5.19.25
