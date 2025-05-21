@@ -50,6 +50,7 @@ export type Database = {
           id: string
           keywords: string[]
           meta_description: string
+          permalink: string | null
           tags: string[]
           title: string
         }
@@ -60,6 +61,7 @@ export type Database = {
           id?: string
           keywords: string[]
           meta_description: string
+          permalink?: string | null
           tags: string[]
           title: string
         }
@@ -70,6 +72,7 @@ export type Database = {
           id?: string
           keywords?: string[]
           meta_description?: string
+          permalink?: string | null
           tags?: string[]
           title?: string
         }
