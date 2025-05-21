@@ -1,16 +1,19 @@
 
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/layout/Layout';
-import { useParams, Link } from 'react-router-dom';
-import { getBlogPostById } from '../utils/blogUtils';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { getBlogPostById, getAllBlogPosts } from '../utils/blogUtils';
 import type { BlogPostData } from '../articles/the-surveillance-state-of-mind';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import { toast } from "sonner";
 
 const BlogPost = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [post, setPost] = useState<{ metadata: BlogPostData; Content: React.ComponentType } | null>(null);
+  const [relatedPosts, setRelatedPosts] = useState<BlogPostData[]>([]);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -23,6 +26,7 @@ const BlogPost = () => {
         
         if (postData) {
           setPost(postData);
+          loadRelatedPosts(postData.metadata);
         } else {
           setError(true);
         }
@@ -36,6 +40,40 @@ const BlogPost = () => {
 
     loadPost();
   }, [id]);
+
+  const loadRelatedPosts = async (currentPost: BlogPostData) => {
+    try {
+      // Get all blog posts
+      const allPosts = await getAllBlogPosts();
+      
+      // Filter out the current post and find posts with matching tags
+      const filtered = allPosts
+        .filter(post => post.id !== currentPost.id)
+        .filter(post => {
+          // Check if any tag in this post matches any tag in the current post
+          return post.tags.some(tag => currentPost.tags.includes(tag));
+        });
+      
+      // Sort by relevance (number of matching tags)
+      filtered.sort((a, b) => {
+        const aMatchCount = a.tags.filter(tag => currentPost.tags.includes(tag)).length;
+        const bMatchCount = b.tags.filter(tag => currentPost.tags.includes(tag)).length;
+        return bMatchCount - aMatchCount;
+      });
+      
+      setRelatedPosts(filtered);
+    } catch (error) {
+      console.error("Error loading related posts:", error);
+    }
+  };
+
+  const handleRelatedPostClick = (relatedPost: BlogPostData | null, index: number) => {
+    if (relatedPost) {
+      navigate(`/blog/${relatedPost.id}`);
+    } else {
+      toast.info(`No more articles related to these topics are currently available.`);
+    }
+  };
 
   if (loading) {
     return (
@@ -96,18 +134,38 @@ const BlogPost = () => {
           <div className="mt-12 pt-8 border-t border-white/20">
             <h2 className="font-glitch text-2xl text-white mb-6">Related Articles</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              <Button variant="outline" className="flex items-center justify-between py-6 h-auto text-left">
+              <Button 
+                variant="outline" 
+                className="flex items-center justify-between py-6 h-auto text-left"
+                onClick={() => handleRelatedPostClick(relatedPosts[0] || null, 0)}
+              >
                 <div>
-                  <h3 className="font-glitch text-cyberpunk-green mb-2">Related Article 1</h3>
-                  <p className="text-xs text-white/70 font-mono">Click to read more about this topic</p>
+                  <h3 className="font-glitch text-cyberpunk-green mb-2">
+                    {relatedPosts[0]?.title || "No Related Article Found"}
+                  </h3>
+                  <p className="text-xs text-white/70 font-mono">
+                    {relatedPosts[0] 
+                      ? `Tags: ${relatedPosts[0].tags.join(', ')}`
+                      : "No more articles with similar tags are currently available"}
+                  </p>
                 </div>
                 <ArrowRight className="ml-2" />
               </Button>
               
-              <Button variant="outline" className="flex items-center justify-between py-6 h-auto text-left">
+              <Button 
+                variant="outline" 
+                className="flex items-center justify-between py-6 h-auto text-left"
+                onClick={() => handleRelatedPostClick(relatedPosts[1] || null, 1)}
+              >
                 <div>
-                  <h3 className="font-glitch text-cyberpunk-green mb-2">Related Article 2</h3>
-                  <p className="text-xs text-white/70 font-mono">Explore more about this subject</p>
+                  <h3 className="font-glitch text-cyberpunk-green mb-2">
+                    {relatedPosts[1]?.title || "No Related Article Found"}
+                  </h3>
+                  <p className="text-xs text-white/70 font-mono">
+                    {relatedPosts[1]
+                      ? `Tags: ${relatedPosts[1].tags.join(', ')}`
+                      : "No more articles with similar tags are currently available"}
+                  </p>
                 </div>
                 <ArrowRight className="ml-2" />
               </Button>
