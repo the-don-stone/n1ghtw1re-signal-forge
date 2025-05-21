@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Mail } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -14,6 +15,12 @@ const Footer: React.FC = () => {
             <p className="font-mono text-sm text-white/80">
               Fighting against surveillance capitalism, technobros, and fascism.
             </p>
+            <div className="flex items-center space-x-2 mt-3">
+              <Mail size={16} className="text-cyberpunk-green" />
+              <a href="mailto:n1ghtw1re@proton.me" className="font-mono text-sm text-white/80 hover:text-cyberpunk-green transition-colors">
+                n1ghtw1re@proton.me
+              </a>
+            </div>
           </div>
           
           <div>

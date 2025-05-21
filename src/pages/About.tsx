@@ -1,6 +1,9 @@
 
 import React from 'react';
 import Layout from '../components/layout/Layout';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Mail } from 'lucide-react';
 
 const About = () => {
   return (
@@ -122,6 +125,47 @@ const About = () => {
                 Welcome to the N1ghtw1re Collective.
               </p>
             </section>
+
+            {/* Contact Section */}
+            <section className="mt-16 border-t border-white/20 pt-8">
+              <h2 className="font-glitch text-2xl text-white mb-6">CONTACT US</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <p className="font-mono text-white/90 mb-4">
+                    Want to join the resistance? Have information to share? Need assistance with digital security?
+                  </p>
+                  <p className="font-mono text-white/90 mb-6">
+                    Reach out securely. We never sell or share your data. Our communications are strictly encrypted and protected.
+                  </p>
+                  
+                  <div className="flex items-center space-x-2 mb-2">
+                    <Mail size={18} className="text-cyberpunk-green" />
+                    <a href="mailto:n1ghtw1re@proton.me" className="font-mono text-cyberpunk-green hover:underline">
+                      n1ghtw1re@proton.me
+                    </a>
+                  </div>
+                </div>
+                
+                <div className="bg-black/50 border border-white/10 p-6">
+                  <h3 className="font-glitch text-lg text-cyberpunk-green mb-4">JOIN OUR NETWORK</h3>
+                  <p className="font-mono text-sm text-white/80 mb-4">
+                    We send extremely rare dispatches with critical information. You can unsubscribe anytime. We will never sell or share your email.
+                  </p>
+                  
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <Input 
+                      placeholder="Your secure email" 
+                      className="bg-black/60 border-white/20 text-white/90 font-mono text-sm"
+                    />
+                    <Button variant="outline" className="border-cyberpunk-green text-cyberpunk-green hover:bg-cyberpunk-green hover:text-black">
+                      Subscribe
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </section>
+            
           </div>
         </div>
       </div>
