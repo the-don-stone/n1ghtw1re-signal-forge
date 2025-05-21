@@ -1,4 +1,3 @@
-Okay, here's the new blog post formatted into your TSX template:
 
 import React from 'react';
 
@@ -15,7 +14,7 @@ export const metadata: BlogPostData = {
   id: "demystifying-web-html-css-matters",
   title: "Demystifying the Web - Why Understanding Basic HTML & CSS Still Matters",
   excerpt: "Even in a world of sophisticated frameworks and website builders, understanding these basics still matters, empowering you to demystify the web and take control of your digital experience.",
-  date: "2025-05-14", // Converted from 5-14-25
+  date: "2025-05-14",
   author: "C1nder5",
   tags: ["HTML", "CSS", "WebDev"]
 };
