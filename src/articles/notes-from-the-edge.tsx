@@ -13,12 +13,12 @@ export interface BlogPostData {
 }
 
 export const metadata: BlogPostData = {
-  id: "notes-from-the-edge", // Change this for new articles
-  title: "Notes From The Edge: Living Without GPS, Ads, or Permission", // Change this for new articles
-  excerpt: "Every app asks for your location. Every site wants your consent. Every ad pretends to know you. I said no.", // Change this for new articles
-  date: "2025-05-23", // Change this for new articles
-  author: "ImVexd", // Change this for new articles
-  tags: ["privacy", "degoogle", "sovereignty", "offline"] // Change this for new articles
+  id: "notes-from-the-edge",
+  title: "Notes From The Edge: Living Without GPS, Ads, or Permission",
+  excerpt: "Every app asks for your location. Every site wants your consent. Every ad pretends to know you. I said no.",
+  date: "2025-05-23",
+  author: "ImVexd",
+  tags: ["privacy", "degoogle", "sovereignty", "offline"]
 };
 
 // The markdown content of your article

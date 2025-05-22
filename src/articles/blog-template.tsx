@@ -13,12 +13,12 @@ export interface BlogPostData {
 }
 
 export const metadata: BlogPostData = {
-  id: "blog-template", // Change this for new articles
-  title: "Blog Post Template", // Change this for new articles
-  excerpt: "A brief excerpt of the blog post goes here.", // Change this for new articles
-  date: "2025-05-23", // Change this for new articles
-  author: "YourName", // Change this for new articles
-  tags: ["template", "example"] // Change this for new articles
+  id: "blog-template",
+  title: "Blog Post Template",
+  excerpt: "A brief excerpt of the blog post goes here.",
+  date: "2025-05-23",
+  author: "YourName",
+  tags: ["template", "example"]
 };
 
 // The markdown content of your article
