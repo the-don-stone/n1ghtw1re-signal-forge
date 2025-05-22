@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 export interface BlogPostData {
@@ -13,9 +14,9 @@ export const metadata: BlogPostData = {
   id: "tools-we-trust",
   title: "Tools We Trust: Open-Source Software That Doesn’t Sell You Out",
   excerpt: "Not every tool spies on you. Some are built by communities, not corporations. Here's a list of open-source software we actually trust.",
-  date: "2025-05-22",
-  author: "Axi0m",
-  tags: ["opensource", "privacy", "tools", "decentralization"]
+  date: "2025-05-23",
+  author: "Axi0m", // Written in the voice of Axi0m
+  tags: ["opensource", "privacy", "tools", "decentralization", "libre"]
 };
 
 const Content: React.FC = () => {
@@ -26,8 +27,7 @@ const Content: React.FC = () => {
 *by Axi0m // N1ghtw1re Node Report 042 // trust: verified*
 
 ---
-
- _“Every system is a choice. Every tool is a value statement.”_
+_“Every system is a choice. Every tool is a value statement.”_
 
 ---
 
@@ -63,7 +63,7 @@ We don’t blindly trust software just because it's open-source. Our picks had t
 - 📎 [https://blokada.org](https://blokada.org)
 - System-wide DNS-based ad/tracker blocker
 - Works offline, no cloud nonsense
-     
+
     </div>
   );
 };
