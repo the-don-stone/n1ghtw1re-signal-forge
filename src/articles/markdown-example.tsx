@@ -103,7 +103,7 @@ const markdownComponents = {
 
 const Content: React.FC = () => {
   return (
-    <div>
+    <div className="prose prose-invert max-w-none">
       <ReactMarkdown 
         remarkPlugins={[remarkGfm]} 
         components={markdownComponents}
