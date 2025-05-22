@@ -7,6 +7,7 @@ import type { BlogPostData } from '../articles/the-surveillance-state-of-mind';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { toast } from "sonner";
+import { Helmet } from "react-helmet-async";
 
 const BlogPost = () => {
   const { id } = useParams<{ id: string }>();
@@ -110,6 +111,19 @@ const BlogPost = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>{metadata.title} | N1GHTW1RE</title>
+        <meta name="description" content={metadata.excerpt} />
+        <meta property="og:title" content={metadata.title} />
+        <meta property="og:description" content={metadata.excerpt} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={window.location.href} />
+        <meta property="article:published_time" content={metadata.date} />
+        <meta property="article:author" content={metadata.author} />
+        {metadata.tags.map(tag => (
+          <meta key={tag} property="article:tag" content={tag} />
+        ))}
+      </Helmet>
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-3xl mx-auto">
           <h1 className="font-glitch text-4xl md:text-5xl text-cyberpunk-green mb-6">{metadata.title}</h1>
@@ -143,11 +157,6 @@ const BlogPost = () => {
                   <h3 className="font-glitch text-cyberpunk-green mb-2">
                     {relatedPosts[0]?.title || "No Related Article Found"}
                   </h3>
-                  <p className="text-xs text-white/70 font-mono">
-                    {relatedPosts[0] 
-                      ? `Tags: ${relatedPosts[0].tags.join(', ')}`
-                      : "No more articles with similar tags are currently available"}
-                  </p>
                 </div>
                 <ArrowRight className="ml-2" />
               </Button>
@@ -161,11 +170,6 @@ const BlogPost = () => {
                   <h3 className="font-glitch text-cyberpunk-green mb-2">
                     {relatedPosts[1]?.title || "No Related Article Found"}
                   </h3>
-                  <p className="text-xs text-white/70 font-mono">
-                    {relatedPosts[1]
-                      ? `Tags: ${relatedPosts[1].tags.join(', ')}`
-                      : "No more articles with similar tags are currently available"}
-                  </p>
                 </div>
                 <ArrowRight className="ml-2" />
               </Button>
