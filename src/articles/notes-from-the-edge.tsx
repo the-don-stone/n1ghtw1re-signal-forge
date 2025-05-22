@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -14,7 +15,7 @@ export interface BlogPostData {
 export const metadata: BlogPostData = {
   id: "notes-from-the-edge", // Change this for new articles
   title: "Notes From The Edge: Living Without GPS, Ads, or Permission", // Change this for new articles
-  excerpt: "very app asks for your location. Every site wants your consent. Every ad pretends to know you. I said no.", // Change this for new articles
+  excerpt: "Every app asks for your location. Every site wants your consent. Every ad pretends to know you. I said no.", // Change this for new articles
   date: "2025-05-23", // Change this for new articles
   author: "ImVexd", // Change this for new articles
   tags: ["privacy", "degoogle", "sovereignty", "offline"] // Change this for new articles
@@ -28,7 +29,7 @@ const markdownContent = `
 
 ---
 
-> _“Every app asks for your location. Every site wants your consent. Every ad pretends to know you. I said no. Here's what happened.”_
+> _"Every app asks for your location. Every site wants your consent. Every ad pretends to know you. I said no. Here's what happened."_
 
 ---
 
@@ -51,7 +52,7 @@ Here is what I learned—and how you can do it too.
 
 Before unplugging the coordinates, I prepped my loadout:
 
-- 🧭 [Magic Earth](https://www.magicearth.com/): offline maps that don’t track
+- 🧭 [Magic Earth](https://www.magicearth.com/): offline maps that don't track
 - 🔐 [GrapheneOS](https://grapheneos.org/): custom Android OS with hardened privacy
 - 🧊 [Blokada](https://blokada.org/): system-wide ad-blocking
 - 🦊 [Firefox Focus](https://play.google.com)
