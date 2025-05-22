@@ -1,7 +1,4 @@
-
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 
 export interface BlogPostData {
   id: string;
@@ -21,83 +18,43 @@ export const metadata: BlogPostData = {
   tags: ["template", "example"]
 };
 
-// The markdown content of your article
-const markdownContent = `
-# Main Heading
-
-## Introduction
-
-This is a paragraph of text. You can write **bold text**, *italic text*, and [links](https://example.com).
-
-- List item 1
-- List item 2
-- List item 3
-
-## Another Section
-
-> This is a blockquote with some important information.
-
-\`\`\`
-// This is a code block
-function example() {
-  return "Hello, world!";
-}
-\`\`\`
-
-### Subsection
-
-More content goes here...
-`;
-
-// Custom components for styling the markdown
-const markdownComponents = {
-  h1: ({ children }: { children: React.ReactNode }) => (
-    <h1 className="font-glitch text-3xl text-white mt-8 mb-4">{children}</h1>
-  ),
-  h2: ({ children }: { children: React.ReactNode }) => (
-    <h2 className="font-glitch text-2xl text-white mt-8 mb-4">{children}</h2>
-  ),
-  h3: ({ children }: { children: React.ReactNode }) => (
-    <h3 className="font-glitch text-xl text-cyberpunk-green mt-6 mb-3">{children}</h3>
-  ),
-  p: ({ children }: { children: React.ReactNode }) => (
-    <p className="font-mono text-white/90 mb-4">{children}</p>
-  ),
-  ul: ({ children }: { children: React.ReactNode }) => (
-    <ul className="list-disc pl-6 mb-6 space-y-2 font-mono text-white/90">{children}</ul>
-  ),
-  ol: ({ children }: { children: React.ReactNode }) => (
-    <ol className="list-decimal pl-6 mb-6 space-y-2 font-mono text-white/90">{children}</ol>
-  ),
-  blockquote: ({ children }: { children: React.ReactNode }) => (
-    <blockquote className="border-l-4 border-cyberpunk-green pl-4 italic font-mono text-white/80 mb-4">{children}</blockquote>
-  ),
-  code: ({ node, inline, className, children, ...props }: any) => {
-    if (inline) {
-      return <code className="font-mono bg-white/10 px-1 rounded text-cyberpunk-green" {...props}>{children}</code>;
-    }
-    return (
-      <pre className="font-mono bg-black/50 p-4 rounded mb-4 overflow-x-auto">
-        <code className="text-cyberpunk-green" {...props}>{children}</code>
-      </pre>
-    );
-  },
-  a: ({ href, children }: { href?: string; children: React.ReactNode }) => (
-    <a href={href} className="text-cyberpunk-green hover:underline" target="_blank" rel="noopener noreferrer">
-      {children}
-    </a>
-  ),
-};
-
 const Content: React.FC = () => {
   return (
     <div className="prose prose-invert max-w-none">
-      <ReactMarkdown 
-        remarkPlugins={[remarkGfm]} 
-        components={markdownComponents}
-      >
-        {markdownContent}
-      </ReactMarkdown>
+      <h1 className="font-glitch text-3xl text-white mt-8 mb-4">Main Heading</h1>
+      
+      <h2 className="font-glitch text-2xl text-white mt-8 mb-4">Introduction</h2>
+      
+      <p className="font-mono text-white/90 mb-4">
+        This is a paragraph of text. You can write <strong>bold text</strong>, <em>italic text</em>, and <a href="https://example.com" className="text-cyberpunk-green hover:underline" target="_blank" rel="noopener noreferrer">links</a>.
+      </p>
+      
+      <ul className="list-disc pl-6 mb-6 space-y-2 font-mono text-white/90">
+        <li>List item 1</li>
+        <li>List item 2</li>
+        <li>List item 3</li>
+      </ul>
+      
+      <h2 className="font-glitch text-2xl text-white mt-8 mb-4">Another Section</h2>
+      
+      <blockquote className="border-l-4 border-cyberpunk-green pl-4 italic font-mono text-white/80 mb-4">
+        <p>This is a blockquote with some important information.</p>
+      </blockquote>
+      
+      <pre className="font-mono bg-black/50 p-4 rounded mb-4 overflow-x-auto">
+        <code className="text-cyberpunk-green">
+          // This is a code block<br />
+          function example() &#123;<br />
+            &nbsp;&nbsp;return "Hello, world!";<br />
+          &#125;
+        </code>
+      </pre>
+      
+      <h3 className="font-glitch text-xl text-cyberpunk-green mt-6 mb-3">Subsection</h3>
+      
+      <p className="font-mono text-white/90 mb-4">
+        More content goes here...
+      </p>
     </div>
   );
 };
