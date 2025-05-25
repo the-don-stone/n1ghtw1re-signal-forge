@@ -1,39 +1,34 @@
 
 import React, { useEffect, useState } from 'react';
+import { useParams, Navigate } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { getBlogPostById, getAllBlogPosts } from '../utils/blogUtils';
-import type { BlogPostData } from '../articles/the-surveillance-state-of-mind';
-import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
-import { toast } from "sonner";
-import { Helmet } from "react-helmet-async";
+import { getPostBySlug, type BlogPost as BlogPostType } from '../utils/blogApi';
+import MarkdownRenderer from '../utils/markdownRenderer';
 
 const BlogPost = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
+  const [post, setPost] = useState<BlogPostType | null>(null);
   const [loading, setLoading] = useState(true);
-  const [post, setPost] = useState<{ metadata: BlogPostData; Content: React.ComponentType } | null>(null);
-  const [relatedPosts, setRelatedPosts] = useState<BlogPostData[]>([]);
-  const [error, setError] = useState(false);
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     const loadPost = async () => {
+      if (!id) {
+        setNotFound(true);
+        setLoading(false);
+        return;
+      }
+
       try {
-        if (!id) return;
-        
-        setLoading(true);
-        const postData = await getBlogPostById(id);
-        
-        if (postData) {
-          setPost(postData);
-          loadRelatedPosts(postData.metadata);
+        const fetchedPost = await getPostBySlug(id);
+        if (fetchedPost) {
+          setPost(fetchedPost);
         } else {
-          setError(true);
+          setNotFound(true);
         }
-      } catch (err) {
-        console.error('Error loading blog post:', err);
-        setError(true);
+      } catch (error) {
+        console.error('Failed to load blog post:', error);
+        setNotFound(true);
       } finally {
         setLoading(false);
       }
@@ -42,147 +37,57 @@ const BlogPost = () => {
     loadPost();
   }, [id]);
 
-  const loadRelatedPosts = async (currentPost: BlogPostData) => {
-    try {
-      // Get all blog posts
-      const allPosts = await getAllBlogPosts();
-      
-      // Filter out the current post and find posts with matching tags
-      const filtered = allPosts
-        .filter(post => post.id !== currentPost.id)
-        .filter(post => {
-          // Check if any tag in this post matches any tag in the current post
-          return post.tags.some(tag => currentPost.tags.includes(tag));
-        });
-      
-      // Sort by relevance (number of matching tags)
-      filtered.sort((a, b) => {
-        const aMatchCount = a.tags.filter(tag => currentPost.tags.includes(tag)).length;
-        const bMatchCount = b.tags.filter(tag => currentPost.tags.includes(tag)).length;
-        return bMatchCount - aMatchCount;
-      });
-      
-      setRelatedPosts(filtered);
-    } catch (error) {
-      console.error("Error loading related posts:", error);
-    }
-  };
-
-  const handleRelatedPostClick = (relatedPost: BlogPostData | null, index: number) => {
-    if (relatedPost) {
-      navigate(`/blog/${relatedPost.id}`);
-    } else {
-      toast.info(`No more articles related to these topics are currently available.`);
-    }
-  };
-
   if (loading) {
     return (
       <Layout>
         <div className="container mx-auto px-4 py-16">
-          <div className="max-w-3xl mx-auto text-center">
+          <div className="text-center">
             <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-cyberpunk-green border-r-transparent"></div>
-            <p className="font-mono text-white/70 mt-4">Decrypting dispatch...</p>
+            <p className="font-mono text-white/70 mt-4">Loading dispatch...</p>
           </div>
         </div>
       </Layout>
     );
   }
 
-  if (error || !post) {
-    return (
-      <Layout>
-        <div className="container mx-auto px-4 py-16">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="font-glitch text-4xl text-cyberpunk-green mb-8">DISPATCH NOT FOUND</h1>
-            <p className="font-mono text-white/90 mb-8">
-              The dispatch you're looking for doesn't exist or has been encrypted.
-            </p>
-            <Link to="/blog" className="font-mono text-cyberpunk-green hover:underline">
-              ← BACK TO ALL DISPATCHES
-            </Link>
-          </div>
-        </div>
-      </Layout>
-    );
+  if (notFound || !post) {
+    return <Navigate to="/404" replace />;
   }
 
-  const { metadata, Content } = post;
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  };
 
   return (
     <Layout>
-      <Helmet>
-        <title>{metadata.title} | N1GHTW1RE</title>
-        <meta name="description" content={metadata.excerpt} />
-        <meta property="og:title" content={metadata.title} />
-        <meta property="og:description" content={metadata.excerpt} />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={window.location.href} />
-        <meta property="article:published_time" content={metadata.date} />
-        <meta property="article:author" content={metadata.author} />
-        {metadata.tags.map(tag => (
-          <meta key={tag} property="article:tag" content={tag} />
-        ))}
-      </Helmet>
       <div className="container mx-auto px-4 py-16">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="font-glitch text-4xl md:text-5xl text-cyberpunk-green mb-6">{metadata.title}</h1>
-          
-          <div className="flex items-center space-x-4 mb-8">
-            <span className="font-mono text-xs text-white/60">{metadata.date}</span>
-            <span className="font-mono text-xs text-cyberpunk-green">by {metadata.author}</span>
-          </div>
-          
-          <div className="flex flex-wrap gap-2 mb-12">
-            {metadata.tags.map(tag => (
-              <span key={tag} className="px-2 py-1 text-xs font-mono bg-white/10 text-white/80">
-                {tag}
+        <article className="max-w-3xl mx-auto">
+          <header className="mb-12">
+            <h1 className="font-glitch text-3xl md:text-4xl text-cyberpunk-green mb-6">
+              {post.title}
+            </h1>
+            
+            <div className="flex items-center space-x-4 mb-6">
+              <span className="font-mono text-sm text-white/60">
+                {formatDate(post.created_at)}
               </span>
-            ))}
-          </div>
-          
-          <article className="prose prose-invert max-w-none font-mono">
-            <Content />
-          </article>
-          
-          <div className="mt-12 pt-8 border-t border-white/20">
-            <h2 className="font-glitch text-2xl text-white mb-6">Related Articles</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              <Button 
-                variant="outline" 
-                className="flex items-center justify-between py-6 h-auto text-left"
-                onClick={() => handleRelatedPostClick(relatedPosts[0] || null, 0)}
-              >
-                <div>
-                  <h3 className="font-glitch text-cyberpunk-green mb-2">
-                    {relatedPosts[0]?.title || "No Related Article Found"}
-                  </h3>
-                </div>
-                <ArrowRight className="ml-2" />
-              </Button>
-              
-              <Button 
-                variant="outline" 
-                className="flex items-center justify-between py-6 h-auto text-left"
-                onClick={() => handleRelatedPostClick(relatedPosts[1] || null, 1)}
-              >
-                <div>
-                  <h3 className="font-glitch text-cyberpunk-green mb-2">
-                    {relatedPosts[1]?.title || "No Related Article Found"}
-                  </h3>
-                </div>
-                <ArrowRight className="ml-2" />
-              </Button>
             </div>
             
-            <Link 
-              to="/blog" 
-              className="inline-block font-mono text-cyberpunk-green hover:underline"
-            >
-              ← BACK TO ALL DISPATCHES
-            </Link>
+            {post.excerpt && (
+              <p className="font-mono text-lg text-white/90 border-l-2 border-cyberpunk-green pl-4">
+                {post.excerpt}
+              </p>
+            )}
+          </header>
+          
+          <div className="border-t border-white/20 pt-8">
+            <MarkdownRenderer content={post.content} />
           </div>
-        </div>
+        </article>
       </div>
     </Layout>
   );

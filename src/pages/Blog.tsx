@@ -2,23 +2,22 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/layout/Layout';
 import { Link } from 'react-router-dom';
-import { getAllBlogPosts } from '../utils/blogUtils';
-import type { BlogPostData } from '../articles/the-surveillance-state-of-mind';
+import { getPublishedPosts, type BlogPost } from '../utils/blogApi';
 import { Input } from '../components/ui/input';
 import { Search } from 'lucide-react';
 
 const Blog = () => {
-  const [posts, setPosts] = useState<BlogPostData[]>([]);
+  const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [filteredPosts, setFilteredPosts] = useState<BlogPostData[]>([]);
+  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
 
   useEffect(() => {
     const loadPosts = async () => {
       try {
-        const allPosts = await getAllBlogPosts();
-        setPosts(allPosts);
-        setFilteredPosts(allPosts);
+        const publishedPosts = await getPublishedPosts();
+        setPosts(publishedPosts);
+        setFilteredPosts(publishedPosts);
       } catch (error) {
         console.error('Failed to load blog posts:', error);
       } finally {
@@ -37,23 +36,21 @@ const Blog = () => {
 
     const searchTermLower = searchTerm.toLowerCase();
     const filtered = posts.filter((post) => {
-      // Check title
-      if (post.title.toLowerCase().includes(searchTermLower)) return true;
-      
-      // Check author
-      if (post.author.toLowerCase().includes(searchTermLower)) return true;
-      
-      // Check tags
-      if (post.tags.some(tag => tag.toLowerCase().includes(searchTermLower))) return true;
-      
-      // Check excerpt (as a proxy for content since we don't load the full content here)
-      if (post.excerpt.toLowerCase().includes(searchTermLower)) return true;
-      
-      return false;
+      return post.title.toLowerCase().includes(searchTermLower) ||
+             (post.excerpt && post.excerpt.toLowerCase().includes(searchTermLower)) ||
+             post.content.toLowerCase().includes(searchTermLower);
     });
     
     setFilteredPosts(filtered);
   }, [searchTerm, posts]);
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
+  };
 
   return (
     <Layout>
@@ -71,7 +68,7 @@ const Blog = () => {
             </div>
             <Input
               type="text"
-              placeholder="Search dispatches by title, author, tags or content..."
+              placeholder="Search dispatches..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10 font-mono bg-black/30 border-white/20 focus:border-cyberpunk-green text-white placeholder:text-white/40"
@@ -87,37 +84,32 @@ const Blog = () => {
             <>
               {filteredPosts.length === 0 ? (
                 <div className="text-center py-12 border border-white/20 p-6">
-                  <p className="font-mono text-white/70">No dispatches found matching your search.</p>
+                  <p className="font-mono text-white/70">
+                    {posts.length === 0 ? 'No dispatches published yet.' : 'No dispatches found matching your search.'}
+                  </p>
                 </div>
               ) : (
                 <div className="space-y-12">
                   {filteredPosts.map(post => (
                     <article key={post.id} className="border border-white/20 p-6 hover:border-cyberpunk-green transition-colors">
                       <h2 className="font-glitch text-2xl text-white mb-3">
-                        <Link to={`/blog/${post.id}`} className="hover:text-cyberpunk-green transition-colors">
+                        <Link to={`/blog/${post.slug}`} className="hover:text-cyberpunk-green transition-colors">
                           {post.title}
                         </Link>
                       </h2>
                       
                       <div className="flex items-center space-x-4 mb-4">
-                        <span className="font-mono text-xs text-white/60">{post.date}</span>
-                        <span className="font-mono text-xs text-cyberpunk-green">by {post.author}</span>
+                        <span className="font-mono text-xs text-white/60">{formatDate(post.created_at)}</span>
                       </div>
                       
-                      <p className="font-mono text-white/90 mb-4">
-                        {post.excerpt}
-                      </p>
-                      
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {post.tags.map(tag => (
-                          <span key={tag} className="px-2 py-1 text-xs font-mono bg-white/10 text-white/80">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
+                      {post.excerpt && (
+                        <p className="font-mono text-white/90 mb-4">
+                          {post.excerpt}
+                        </p>
+                      )}
                       
                       <Link
-                        to={`/blog/${post.id}`}
+                        to={`/blog/${post.slug}`}
                         className="font-mono text-cyberpunk-green hover:underline"
                       >
                         READ FULL DISPATCH →
@@ -128,15 +120,6 @@ const Blog = () => {
               )}
             </>
           )}
-          
-          <div className="mt-12 flex justify-center">
-            <a 
-              href="#archives" 
-              className="inline-block px-6 py-3 bg-transparent border border-white text-white font-mono hover:bg-white/10 transition-colors"
-            >
-              VIEW ARCHIVES
-            </a>
-          </div>
         </div>
       </div>
     </Layout>
